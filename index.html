@@ -3,115 +3,202 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>รถเช่าพร้อมคนขับทั่วประเทศไทย | Happy Thailand</title>
+  <title>รถเช่าพร้อมคนขับทั่วไทย | จบที่เรา เบาที่สุด</title>
   <style>
     body {
-      font-family: Arial, sans-serif;
+      font-family: Tahoma, Arial, sans-serif;
       margin: 0;
       padding: 0;
-      background: #f9f9f9;
-      color: #333;
+      line-height: 1.8;
+      background: #f8f8f8;
+      color: #111;
     }
     header {
-      background: linear-gradient(to right, #ff99cc, #66ccff);
-      padding: 20px;
-      text-align: center;
+      background: url('https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1500&q=80') no-repeat center center/cover;
       color: white;
+      text-align: center;
+      padding: 100px 20px;
     }
     header h1 {
-      margin: 0;
-      font-size: 2em;
+      font-size: 3.2em;
+      margin-bottom: 15px;
+      font-weight: bold;
+      text-shadow: 3px 3px 6px rgba(0,0,0,0.8);
+      color: #ffde59;
+    }
+    header p {
+      font-size: 1.6em;
+      font-weight: 500;
+      text-shadow: 2px 2px 6px rgba(0,0,0,0.7);
     }
     section {
-      padding: 20px;
-      max-width: 900px;
+      max-width: 1000px;
       margin: auto;
+      padding: 60px 20px;
     }
     h2 {
-      color: #ff6699;
+      text-align: center;
+      font-size: 2.2em;
+      color: #0066cc;
+      margin-bottom: 30px;
+      border-bottom: 3px solid #0066cc;
+      display: inline-block;
+      padding-bottom: 5px;
     }
-    .cars {
-      display: flex;
-      justify-content: space-around;
-      flex-wrap: wrap;
-      margin-top: 20px;
-    }
-    .cars img {
-      width: 280px;
+    .service-box, .step, .reason, .review {
+      background: white;
+      padding: 22px;
+      margin: 15px 0;
       border-radius: 10px;
-      box-shadow: 0 3px 8px rgba(0,0,0,0.2);
-      margin: 10px;
+      box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+      font-size: 1.2em;
+    }
+    .service-box strong, .reason strong, .review strong {
+      color: #d43f00;
+    }
+    .pricing {
+      background: #eef7ff;
+      padding: 25px;
+      border-radius: 12px;
+      font-size: 1.2em;
+    }
+    ul li {
+      margin: 10px 0;
+      font-weight: bold;
+      color: #333;
+    }
+    ul li::before {
+      content: "⭐ ";
+      color: #ff9900;
     }
     .contact {
       text-align: center;
-      margin: 30px 0;
+      margin-top: 40px;
     }
-    .btn {
+    .btn-line {
       display: inline-block;
-      margin: 10px;
-      padding: 12px 20px;
-      border-radius: 8px;
-      text-decoration: none;
+      padding: 18px 40px;
+      background: #06c755;
       color: white;
+      font-size: 1.6em;
       font-weight: bold;
+      border-radius: 10px;
+      text-decoration: none;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+      transition: 0.3s;
     }
-    .phone { background: #ff6699; }
-    .line { background: #00c300; }
+    .btn-line:hover {
+      background: #04a94e;
+      transform: scale(1.05);
+    }
     footer {
-      background: #333;
+      background: #222;
       color: white;
       text-align: center;
-      padding: 15px;
-      margin-top: 20px;
+      padding: 25px;
+      margin-top: 40px;
+      font-size: 1.1em;
+    }
+    /* ไฮไลท์ข้อความ */
+    .highlight {
+      color: #d43f00;
+      font-weight: bold;
+      background: #fff3cd;
+      padding: 2px 6px;
+      border-radius: 5px;
     }
   </style>
 </head>
 <body>
+  <!-- Hero -->
   <header>
-    <h1>🚖 รถเช่าพร้อมคนขับทั่วประเทศไทย</h1>
-    <p>เดินทางสบาย ปลอดภัย บริการด้วยใจ</p>
+    <h1>🚖 รถเช่าพร้อมคนขับทั่วไทย</h1>
+    <p>เดินทางสะดวก <span class="highlight">ปลอดภัย</span> ราคาชัดเจน<br>จบที่เรา <span class="highlight">เบาที่สุด ❤️</span></p>
   </header>
 
+  <!-- Introduction -->
   <section>
-    <h2>บริการของเรา</h2>
-    <p>
-      ให้บริการรถเช่าพร้อมคนขับทั่วประเทศไทย ไม่ว่าจะเป็นการท่องเที่ยว เดินทางข้ามจังหวัด รับ–ส่งสนามบิน 
-      ขนของ หรือแม้กระทั่งขนส่งสัตว์เลี้ยง 🐶🐱 เรามีรถหลายแบบให้เลือก ทั้งรถเก๋ง, SUV และรถตู้ VIP
-    </p>
+    <h2>✨ ทำไมต้องเลือกเรา?</h2>
+    <div class="reason">✅ <strong>คนขับมืออาชีพ</strong> มีประสบการณ์สูง</div>
+    <div class="reason">✅ <strong>รถใหม่ สะอาด</strong> ตรวจเช็คทุกครั้งก่อนให้บริการ</div>
+    <div class="reason">✅ <strong>ราคาตรงไปตรงมา</strong> ไม่มีค่าใช้จ่ายแอบแฝง</div>
+    <div class="reason">✅ รองรับทั้ง <span class="highlight">ท่องเที่ยว – ธุระส่วนตัว – งานสำคัญ</span></div>
+    <div class="reason">✅ ให้บริการ <span class="highlight">ทุกจังหวัดทั่วไทย</span> 🌏</div>
+  </section>
 
-    <div class="cars">
-      <div>
-        <img src="car-sedan.jpg" alt="รถเก๋ง">
-        <p style="text-align:center;">🚘 รถเก๋ง (Sedan)</p>
-      </div>
-      <div>
-        <img src="car-suv.jpg" alt="รถ SUV">
-        <p style="text-align:center;">🚙 รถ SUV</p>
-      </div>
-      <div>
-        <img src="car-van.jpg" alt="รถตู้">
-        <p style="text-align:center;">🚐 รถตู้ VIP</p>
-      </div>
-    </div>
+  <!-- Services -->
+  <section>
+    <h2>🚙 บริการของเรา</h2>
+    <div class="service-box">📍 <strong>เหมารถเที่ยวทั่วไทย</strong> ไป-กลับ หรือเช่าเหมาวัน</div>
+    <div class="service-box">✈️ <strong>รับ–ส่งสนามบิน</strong> โรงแรม ที่พัก</div>
+    <div class="service-box">🛣️ <strong>เดินทางข้ามจังหวัด</strong> ทำธุระ ติดต่อราชการ</div>
+    <div class="service-box">📦 <strong>รับส่งพัสดุ</strong> และงานด่วนพิเศษ</div>
+    <div class="service-box">💼 <strong>บริการสำหรับองค์กร/บริษัท</strong></div>
+  </section>
 
-    <h2>ทำไมต้องเลือกเรา?</h2>
-    <ul>
-      <li>✅ คนขับสุภาพ มีประสบการณ์</li>
-      <li>✅ รถใหม่ สะอาด ปลอดภัย</li>
-      <li>✅ บริการทั่วประเทศ</li>
-      <li>✅ ราคาชัดเจน ไม่มีบวกเพิ่ม</li>
-      <li>✅ ใส่ใจทุกรายละเอียด</li>
-    </ul>
-
-    <div class="contact">
-      <h2>📞 ติดต่อเรา</h2>
-      <a href="tel:0980491999" class="btn phone">โทร : 098-049-1999</a>
-      <a href="https://lin.ee/zETw55f" class="btn line">แชท LINE</a>
+  <!-- Pricing -->
+  <section>
+    <h2>💰 อัตราค่าโดยสาร</h2>
+    <div class="pricing">
+      <p><strong>ระยะทางต่ำกว่า 500 กม.</strong></p>
+      <ul>
+        <li>🚗 รถ 5 ที่นั่ง — <span class="highlight">10 บาท/กม.</span></li>
+        <li>🚙 SUV 7 ที่นั่ง — <span class="highlight">12 บาท/กม.</span></li>
+        <li>🚌 รถตู้ Van — <span class="highlight">14 บาท/กม.</span></li>
+      </ul>
+      <p><strong>ระยะทาง 500 กม. ขึ้นไป</strong></p>
+      <ul>
+        <li>🚗 รถ 5 ที่นั่ง — <span class="highlight">9 บาท/กม.</span></li>
+        <li>🚙 SUV 7 ที่นั่ง — <span class="highlight">11 บาท/กม.</span></li>
+        <li>🚌 รถตู้ Van — <span class="highlight">13 บาท/กม.</span></li>
+      </ul>
+      <p>📍 <strong>กรุงเทพฯ และปริมณฑล</strong> → ติดต่อสอบถามราคา</p>
+      <p>🔎 ตรวจสอบระยะทางจริงได้ผ่าน <strong>Google Maps</strong></p>
     </div>
   </section>
 
+  <!-- How to book -->
+  <section>
+    <h2>📝 วิธีการจองง่ายๆ</h2>
+    <div class="step">1️⃣ แจ้ง <strong>จุดรับ–จุดส่ง</strong> ที่ต้องการเดินทาง</div>
+    <div class="step">2️⃣ เลือก <strong>ประเภทรถ</strong> ที่เหมาะสม (รถเก๋ง / SUV / รถตู้)</div>
+    <div class="step">3️⃣ ระบุ <strong>วันและเวลา</strong> เดินทาง</div>
+    <div class="step">4️⃣ ทีมงานตรวจสอบระยะทางและ <span class="highlight">คำนวณราคา</span></div>
+    <div class="step">5️⃣ ยืนยันการจอง และรับรายละเอียดการเดินทาง</div>
+    <div class="step">6️⃣ คนขับเดินทางไปรับตามเวลาที่นัดหมาย 🚖</div>
+  </section>
+
+  <!-- Reviews -->
+  <section>
+    <h2>💬 ความคิดเห็นจากลูกค้า</h2>
+    <div class="review">“<strong>เดินทางสบายมาก</strong> คนขับสุภาพ รถสะอาดเหมือนใหม่ ประทับใจค่ะ” – คุณแอน</div>
+    <div class="review">“จองง่าย <span class="highlight">ราคาไม่แพง</span> ตรงเวลา บริการดีมากครับ” – คุณบอย</div>
+    <div class="review">“ต้องเดินทางต่างจังหวัดบ่อย ใช้บริการที่นี่ตลอด <strong>มั่นใจได้จริง</strong>” – คุณสมชาย</div>
+  </section>
+
+  <!-- Contact -->
+  <section class="contact">
+    <h2>📞 ติดต่อเราได้ที่</h2>
+    <p><strong>โทร:</strong> <a href="tel:0980491999">098-049-1999</a></p>
+    <p>
+      <a href="https://lin.ee/fXbdC0N" target="_blank" class="btn-line">💬 แชท LINE คลิกที่นี่</a>
+    </p>
+  </section>
+
+  <!-- Thank you -->
+  <section style="background: #f0f8ff; padding: 40px; text-align: center; border-radius: 12px; margin-top: 30px;">
+    <h2 style="font-size: 2em; color: #333;">🙏 ขอบคุณที่ใช้บริการ</h2>
+    <p style="font-size: 1.3em; color: #555; line-height: 1.8;">
+      เราพร้อมดูแลการเดินทางของคุณทุกเส้นทาง  
+      ขอให้การเดินทางของคุณ <span class="highlight">สะดวกสบาย ปลอดภัย</span> และเต็มไปด้วยความสุข ✨  
+      <br><br>
+      หากมีข้อสงสัยเพิ่มเติมสามารถติดต่อเราได้ตลอด <strong>24 ชั่วโมง</strong>
+    </p>
+  </section>
+
   <footer>
-    © 2025 รถเช่าพร้อมคนขับทั่วประเทศไทย | Happy Thailand
+    © 2025 รถเช่าพร้อมคนขับทั่วไทย | จบที่เรา เบาที่สุด
   </footer>
 </body>
 </html>
+      
