@@ -1,44 +1,127 @@
-!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="th">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>บริการรถเช่า</title>
+  <title>แท็กซี่แฮปปี้ไทยแลนด์ - บริการรถเช่าพร้อมคนขับ</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: "Prompt", sans-serif;
+      background: linear-gradient(135deg, #e0f7fa, #b2ebf2);
+      color: #333;
+      text-align: center;
+    }
+    header {
+      padding: 40px 20px;
+      background: rgba(255,255,255,0.7);
+      border-bottom: 2px solid #81d4fa;
+    }
+    header h1 {
+      font-size: 38px;
+      margin-bottom: 10px;
+      font-weight: bold;
+      color: #0277bd;
+    }
+    header p {
+      font-size: 18px;
+      color: #555;
+    }
+    section {
+      padding: 40px 20px;
+    }
+    .highlight {
+      font-size: 26px;
+      font-weight: bold;
+      margin: 20px 0;
+      color: #009688;
+    }
+    .service {
+      margin: 25px auto;
+      padding: 20px;
+      background: #ffffffcc;
+      border-radius: 15px;
+      max-width: 700px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+    .service h2 {
+      font-size: 28px;
+      margin-bottom: 10px;
+      color: #00796b;
+    }
+    .service p {
+      font-size: 17px;
+      line-height: 1.6;
+      color: #444;
+    }
+    .contact {
+      background: #e0f2f1;
+      padding: 40px 20px;
+    }
+    .contact h2 {
+      font-size: 28px;
+      margin-bottom: 20px;
+      color: #004d40;
+    }
+    .contact a {
+      display: block;
+      font-size: 22px;
+      color: #00796b;
+      text-decoration: none;
+      margin: 10px 0;
+      font-weight: bold;
+    }
+    .contact a:hover {
+      color: #004d40;
+    }
+    footer {
+      background: #b2dfdb;
+      padding: 15px;
+      font-size: 14px;
+      color: #004d40;
+    }
+  </style>
 </head>
-<body style="font-family: Arial, sans-serif; text-align: center; background: #f9f9f9; margin:0;">
+<body>
 
-  <h1 style="background:#0073e6;color:white;padding:20px;margin:0;">
-    บริการรถเช่าพร้อมคนขับ
-  </h1>
-  <p style="font-size:18px;margin:15px 0;">เดินทางข้ามจังหวัด ราคาสุดคุ้ม บริการ 24 ชั่วโมง</p>
+  <header>
+    <h1>🚖 แท็กซี่แฮปปี้ไทยแลนด์</h1>
+    <p>บริการรถเช่าพร้อมคนขับทั่วไทย เดินทางปลอดภัย สะดวกสบาย บริการด้วยใจ ❤</p>
+  </header>
 
-  <h2>เลือกรถที่คุณต้องการ</h2>
+  <section>
+    <div class="highlight">🚗 เลือกรถได้ตามต้องการ</div>
 
-  <div>
-    <img src="https://upload.wikimedia.org/wikipedia/commons/9/9b/Toyota_Commuter_Van.jpg" alt="รถตู้" width="300"><br>
-    <b>รถตู้ VIP</b><br>เหมาะสำหรับเดินทางเป็นหมู่คณะ
-  </div><br>
+    <div class="service">
+      <h2>🚙 ฟอร์จูนเนอร์ (SUV)</h2>
+      <p>เหมาะสำหรับครอบครัวหรือเดินทางต่างจังหวัด นั่งสบาย กว้างขวาง และหรูหรา</p>
+    </div>
 
-  <div>
-    <img src="https://upload.wikimedia.org/wikipedia/commons/9/99/2019_Toyota_Corolla_Icon_Tech_VVT-i_HEV_CVT_1.8_Front.jpg" alt="รถเก๋ง" width="300"><br>
-    <b>รถเก๋ง Altis</b><br>เหมาะสำหรับครอบครัวเล็ก
-  </div><br>
+    <div class="service">
+      <h2>🚐 รถตู้ VIP</h2>
+      <p>เหมาะสำหรับเดินทางเป็นหมู่คณะ ที่นั่งเยอะ แอร์เย็นนั่งสบาย รองรับทั้งครอบครัวและนักท่องเที่ยว</p>
+    </div>
 
-  <div>
-    <img src="https://upload.wikimedia.org/wikipedia/commons/2/2c/2018_Toyota_Fortuner_CRUISER_Wagon_%28Front%29.jpg" alt="SUV" width="300"><br>
-    <b>SUV</b><br>เหมาะสำหรับทุกเส้นทาง
-  </div><br>
+    <div class="service">
+      <h2>🚘 รถเก๋งอัลติส</h2>
+      <p>สำหรับการเดินทางในเมือง ราคาประหยัด แอร์เย็น คนขับสุภาพ พร้อมดูแลคุณตลอดเส้นทาง</p>
+    </div>
 
-  <a href="https://line.me/ti/p/XXXXXXXX" target="_blank" 
-     style="display:inline-block;background:#06C755;color:white;padding:15px 30px;
-            border-radius:10px;text-decoration:none;font-size:18px;">
-    💬 ติดต่อทาง LINE
-  </a>
+    <div class="service">
+      <h2>🐶 บริการส่งสัตว์เลี้ยง</h2>
+      <p>ปลอดภัยสำหรับน้องหมา น้องแมว และสัตว์เลี้ยงทุกชนิด ใส่ใจเหมือนครอบครัว</p>
+    </div>
+  </section>
 
-  <footer style="margin-top:30px;background:#333;color:white;padding:15px;">
-    © 2025 บริการรถเช่าเดินทางทั่วไทย
+  <section class="contact">
+    <h2>📞 ติดต่อจองรถ</h2>
+    <a href="tel:0980491999">📱 โทร : 098-049-1999</a>
+    <a href="https://lin.ee/zETw55f" target="_blank">💚 LINE : คลิกที่นี่</a>
+  </section>
+
+  <footer>
+    © 2025 แท็กซี่แฮปปี้ไทยแลนด์ | บริการด้วยใจ ปลอดภัยทุกการเดินทาง
   </footer>
 
 </body>
 </html>
-<img src="images/van.jpg" alt="รถตู้" width="300">
