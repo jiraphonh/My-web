@@ -1,127 +1,400 @@
-<!DOCTYPE html>
-<html lang="th">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>แท็กซี่แฮปปี้ไทยแลนด์ - บริการรถเช่าพร้อมคนขับ</title>
-  <style>
-    body {
-      margin: 0;
-      font-family: "Prompt", sans-serif;
-      background: linear-gradient(135deg, #e0f7fa, #b2ebf2);
-      color: #333;
-      text-align: center;
-    }
-    header {
-      padding: 40px 20px;
-      background: rgba(255,255,255,0.7);
-      border-bottom: 2px solid #81d4fa;
-    }
-    header h1 {
-      font-size: 38px;
-      margin-bottom: 10px;
-      font-weight: bold;
-      color: #0277bd;
-    }
-    header p {
-      font-size: 18px;
-      color: #555;
-    }
-    section {
-      padding: 40px 20px;
-    }
-    .highlight {
-      font-size: 26px;
-      font-weight: bold;
-      margin: 20px 0;
-      color: #009688;
-    }
-    .service {
-      margin: 25px auto;
-      padding: 20px;
-      background: #ffffffcc;
-      border-radius: 15px;
-      max-width: 700px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-    }
-    .service h2 {
-      font-size: 28px;
-      margin-bottom: 10px;
-      color: #00796b;
-    }
-    .service p {
-      font-size: 17px;
-      line-height: 1.6;
-      color: #444;
-    }
-    .contact {
-      background: #e0f2f1;
-      padding: 40px 20px;
-    }
-    .contact h2 {
-      font-size: 28px;
-      margin-bottom: 20px;
-      color: #004d40;
-    }
-    .contact a {
-      display: block;
-      font-size: 22px;
-      color: #00796b;
-      text-decoration: none;
-      margin: 10px 0;
-      font-weight: bold;
-    }
-    .contact a:hover {
-      color: #004d40;
-    }
-    footer {
-      background: #b2dfdb;
-      padding: 15px;
-      font-size: 14px;
-      color: #004d40;
-    }
-  </style>
-</head>
-<body>
+import React, { useMemo, useState } from "react";
+import { motion } from "framer-motion";
+import { Car as CarIcon, Van, Gauge, Phone, MapPin, Calendar, Star, ChevronRight } from "lucide-react";
 
-  <header>
-    <h1>🚖 แท็กซี่แฮปปี้ไทยแลนด์</h1>
-    <p>บริการรถเช่าพร้อมคนขับทั่วไทย เดินทางปลอดภัย สะดวกสบาย บริการด้วยใจ ❤</p>
-  </header>
+// ===================== CONFIG =====================
+const COMPANY = {
+  nameTh: "อัญญา รถเช่าพร้อมคนขับ",
+  phone: "08x-xxx-xxxx",
+  line: "@yourline",
+  facebook: "yourpage",
+  baseCity: "กรุงเทพฯ และปริมณฑล",
+};
 
-  <section>
-    <div class="highlight">🚗 เลือกรถได้ตามต้องการ</div>
+const CATEGORIES = [
+  { key: "all", label: "ทั้งหมด" },
+  { key: "compact", label: "รถเล็ก" },
+  { key: "suv", label: "SUV" },
+  { key: "van", label: "รถตู้" },
+];
 
-    <div class="service">
-      <h2>🚙 ฟอร์จูนเนอร์ (SUV)</h2>
-      <p>เหมาะสำหรับครอบครัวหรือเดินทางต่างจังหวัด นั่งสบาย กว้างขวาง และหรูหรา</p>
-    </div>
+const FLEET = [
+  {
+    id: "cmp-1",
+    name: "Eco Compact A",
+    brand: "Toyota Yaris หรือเทียบเท่า",
+    seats: 4,
+    luggage: 2,
+    priceDay: 1800,
+    priceHalf: 1200,
+    fuel: "เบนซิน",
+    category: "compact",
+    img: "https://images.unsplash.com/photo-1552519507-da3b142c6e3d?q=80&w=1200&auto=format&fit=crop",
+    features: ["แอร์เย็น", "ประหยัดน้ำมัน", "Bluetooth"],
+  },
+  {
+    id: "cmp-2",
+    name: "City Compact B",
+    brand: "Honda City หรือเทียบเท่า",
+    seats: 4,
+    luggage: 2,
+    priceDay: 2000,
+    priceHalf: 1400,
+    fuel: "เบนซิน",
+    category: "compact",
+    img: "https://images.unsplash.com/photo-1549924231-f129b911e442?q=80&w=1200&auto=format&fit=crop",
+    features: ["ที่ชาร์จ USB", "กล้องถอยหลัง"],
+  },
+  {
+    id: "suv-1",
+    name: "Comfort SUV X",
+    brand: "Toyota Fortuner หรือเทียบเท่า",
+    seats: 7,
+    luggage: 4,
+    priceDay: 3500,
+    priceHalf: 2200,
+    fuel: "ดีเซล",
+    category: "suv",
+    img: "https://images.unsplash.com/photo-1493238792000-8113da705763?q=80&w=1200&auto=format&fit=crop",
+    features: ["กว้างขวาง", "ช่วงล่างนุ่ม", "ที่นั่ง 3 แถว"],
+  },
+  {
+    id: "suv-2",
+    name: "Premium SUV Z",
+    brand: "Honda CR‑V หรือเทียบเท่า",
+    seats: 5,
+    luggage: 4,
+    priceDay: 3200,
+    priceHalf: 2100,
+    fuel: "เบนซิน",
+    category: "suv",
+    img: "https://images.unsplash.com/photo-1503376780353-7e6692767b70?q=80&w=1200&auto=format&fit=crop",
+    features: ["เบาะหนัง", "A/C แยกโซน", "Cruise Control"],
+  },
+  {
+    id: "van-1",
+    name: "Business Van V",
+    brand: "Toyota Commuter หรือเทียบเท่า",
+    seats: 10,
+    luggage: 6,
+    priceDay: 3800,
+    priceHalf: 2600,
+    fuel: "ดีเซล",
+    category: "van",
+    img: "https://images.unsplash.com/photo-1585066039417-4b5a3b9a8f26?q=80&w=1200&auto=format&fit=crop",
+    features: ["ทีวี/USB", "ที่นั่งกว้าง", "เหมาะกับกรุ๊ป"],
+  },
+  {
+    id: "van-2",
+    name: "VIP Van Elite",
+    brand: "Hyundai H‑1 หรือเทียบเท่า",
+    seats: 7,
+    luggage: 6,
+    priceDay: 4500,
+    priceHalf: 3000,
+    fuel: "ดีเซล",
+    category: "van",
+    img: "https://images.unsplash.com/photo-1551836022-d5d88e9218df?q=80&w=1200&auto=format&fit=crop",
+    features: ["เบาะ VIP", "ไฟ Ambient", "เหมาะรับแขกผู้ใหญ่"],
+  },
+];
 
-    <div class="service">
-      <h2>🚐 รถตู้ VIP</h2>
-      <p>เหมาะสำหรับเดินทางเป็นหมู่คณะ ที่นั่งเยอะ แอร์เย็นนั่งสบาย รองรับทั้งครอบครัวและนักท่องเที่ยว</p>
-    </div>
-
-    <div class="service">
-      <h2>🚘 รถเก๋งอัลติส</h2>
-      <p>สำหรับการเดินทางในเมือง ราคาประหยัด แอร์เย็น คนขับสุภาพ พร้อมดูแลคุณตลอดเส้นทาง</p>
-    </div>
-
-    <div class="service">
-      <h2>🐶 บริการส่งสัตว์เลี้ยง</h2>
-      <p>ปลอดภัยสำหรับน้องหมา น้องแมว และสัตว์เลี้ยงทุกชนิด ใส่ใจเหมือนครอบครัว</p>
+// ===================== UI HELPERS =====================
+const Section = ({ id, title, subtitle, children }: any) => (
+  <section id={id} className="relative py-16 md:py-20">
+    <div className="max-w-7xl mx-auto px-4">
+      {(title || subtitle) && (
+        <div className="mb-10">
+          {title && (
+            <h2 className="text-2xl md:text-3xl font-bold tracking-tight">{title}</h2>
+          )}
+          {subtitle && (
+            <p className="text-sm md:text-base text-gray-600 mt-2">{subtitle}</p>
+          )}
+        </div>
+      )}
+      {children}
     </div>
   </section>
+);
 
-  <section class="contact">
-    <h2>📞 ติดต่อจองรถ</h2>
-    <a href="tel:0980491999">📱 โทร : 098-049-1999</a>
-    <a href="https://lin.ee/zETw55f" target="_blank">💚 LINE : คลิกที่นี่</a>
-  </section>
+const Feature = ({ icon: Icon, title, desc }: any) => (
+  <div className="p-5 rounded-2xl border bg-white shadow-sm">
+    <div className="flex items-center gap-3">
+      <div className="p-2 rounded-xl bg-gray-100"><Icon size={22} /></div>
+      <h4 className="font-semibold">{title}</h4>
+    </div>
+    <p className="text-sm text-gray-600 mt-3 leading-relaxed">{desc}</p>
+  </div>
+);
 
-  <footer>
-    © 2025 แท็กซี่แฮปปี้ไทยแลนด์ | บริการด้วยใจ ปลอดภัยทุกการเดินทาง
-  </footer>
+// ===================== MAIN APP =====================
+export default function RentalLanding() {
+  const [filter, setFilter] = useState<string>("all");
+  const [form, setForm] = useState<any>({
+    name: "",
+    phone: "",
+    date: "",
+    pickup: "",
+    dropoff: "",
+    type: "compact",
+  });
 
-</body>
-</html>
+  const filtered = useMemo(
+    () => (filter === "all" ? FLEET : FLEET.filter((c) => c.category === filter)),
+    [filter]
+  );
+
+  function onSubmit(e: React.FormEvent) {
+    e.preventDefault();
+    const payload = {
+      ...form,
+      createdAt: new Date().toISOString(),
+    };
+    console.log("booking:", payload);
+    alert(
+      `ขอบคุณที่ติดต่อครับ!\nชื่อ: ${payload.name}\nโทร: ${payload.phone}\nวันที่: ${payload.date}\nประเภทรถ: ${payload.type}\nสถานที่รับ: ${payload.pickup}\nส่ง: ${payload.dropoff}`
+    );
+  }
+
+  return (
+    <div className="min-h-screen bg-gradient-to-b from-white via-white to-gray-50 text-gray-900">
+      {/* NAVBAR */}
+      <header className="sticky top-0 z-40 bg-white/80 backdrop-blur border-b">
+        <div className="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
+          <div className="flex items-center gap-2 font-bold text-lg md:text-xl">
+            <CarIcon className="inline" />
+            <span>{COMPANY.nameTh}</span>
+          </div>
+          <nav className="hidden md:flex items-center gap-6 text-sm">
+            <a href="#services" className="hover:text-black">บริการ</a>
+            <a href="#fleet" className="hover:text-black">รถให้เช่า</a>
+            <a href="#pricing" className="hover:text-black">ราคา</a>
+            <a href="#booking" className="hover:text-black">จองรถ</a>
+            <a href="#contact" className="hover:text-black">ติดต่อเรา</a>
+          </nav>
+          <a href="#booking" className="ml-4 inline-flex items-center gap-2 rounded-2xl px-4 py-2 border shadow-sm hover:shadow transition">
+            <Phone size={16} /> จองทันที
+          </a>
+        </div>
+      </header>
+
+      {/* HERO */}
+      <section className="relative overflow-hidden">
+        <div className="max-w-7xl mx-auto px-4 py-12 md:py-20 grid md:grid-cols-2 gap-10 items-center">
+          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}>
+            <h1 className="text-3xl md:text-5xl font-extrabold leading-tight">
+              บริการรถเช่าพร้อมคนขับ
+              <span className="block text-gray-600 text-2xl md:text-3xl mt-2">{COMPANY.baseCity}</span>
+            </h1>
+            <p className="mt-5 text-gray-600 leading-relaxed">
+              เลือกได้ทั้ง <b>รถเล็ก</b>, <b>SUV</b>, และ <b>รถตู้</b> เหมาะสำหรับท่องเที่ยว ธุระส่วนตัว รับ-ส่งสนามบิน และงานองค์กร
+              คนขับมืออาชีพ ตรงเวลา ปลอดภัย สะดวกสบาย
+            </p>
+            <div className="mt-6 flex flex-wrap gap-3">
+              <a href="#fleet" className="inline-flex items-center gap-2 px-5 py-3 rounded-2xl bg-black text-white hover:opacity-90">
+                ดูรถที่พร้อมให้บริการ <ChevronRight size={18} />
+              </a>
+              <a href="#booking" className="inline-flex items-center gap-2 px-5 py-3 rounded-2xl border">
+                ขอใบเสนอราคา
+              </a>
+            </div>
+            <div className="mt-6 flex items-center gap-1 text-yellow-600">
+              {Array.from({ length: 5 }).map((_, i) => (
+                <Star key={i} size={18} fill="currentColor" />
+              ))}
+              <span className="ml-2 text-sm text-gray-600">รีวิวดีจากลูกค้าจริง</span>
+            </div>
+          </motion.div>
+          <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.1 }} className="relative">
+            <div className="aspect-[16/10] w-full rounded-3xl overflow-hidden shadow-2xl border">
+              <img
+                src="https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?q=80&w=1600&auto=format&fit=crop"
+                alt="Chauffeur service"
+                className="w-full h-full object-cover"
+                loading="lazy"
+              />
+            </div>
+            <div className="absolute -bottom-6 -left-4 bg-white rounded-2xl shadow p-4 border hidden md:flex items-center gap-3">
+              <MapPin size={18} />
+              <div>
+                <div className="text-xs text-gray-500">พื้นที่ให้บริการ</div>
+                <div className="font-semibold">{COMPANY.baseCity}</div>
+              </div>
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* SERVICES */}
+      <Section id="services" title="บริการของเรา" subtitle="เลือกแพ็กเกจตามการใช้งานของคุณ">
+        <div className="grid md:grid-cols-3 gap-5">
+          <Feature icon={Gauge} title="รับ-ส่งสนามบิน" desc="รับ-ส่งสนามบินดอนเมือง/สุวรรณภูมิ พร้อมบริการช่วยยกสัมภาระ" />
+          <Feature icon={CarIcon} title="เหมารถรายวัน" desc="ท่องเที่ยว ทำธุระ ตจว. หรือในเมือง คนขับชำนาญเส้นทาง" />
+          <Feature icon={Van} title="งานองค์กร/อีเวนต์" desc="ดูแลองค์กร จัดรถรับรองผู้บริหาร ลูกค้าต่างชาติ และกรุ๊ปทัวร์" />
+        </div>
+      </Section>
+
+      {/* FLEET */}
+      <Section id="fleet" title="รถพร้อมให้บริการ" subtitle="รถเล็ก • SUV • รถตู้ – เลือกตามความต้องการ">
+        <div className="flex flex-wrap gap-2 mb-6">
+          {CATEGORIES.map((c) => (
+            <button
+              key={c.key}
+              onClick={() => setFilter(c.key)}
+              className={`px-4 py-2 rounded-2xl border transition ${
+                filter === c.key ? "bg-black text-white" : "bg-white hover:bg-gray-50"
+              }`}
+            >
+              {c.label}
+            </button>
+          ))}
+        </div>
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          {filtered.map((car) => (
+            <motion.div key={car.id} initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.3 }} className="bg-white rounded-3xl border overflow-hidden shadow-sm">
+              <div className="aspect-[16/10] w-full overflow-hidden">
+                <img src={car.img} alt={car.name} className="w-full h-full object-cover" loading="lazy" />
+              </div>
+              <div className="p-5">
+                <div className="flex items-start justify-between gap-3">
+                  <div>
+                    <h3 className="font-semibold text-lg">{car.name}</h3>
+                    <p className="text-sm text-gray-600">{car.brand}</p>
+                  </div>
+                  <span className="text-xs rounded-full border px-3 py-1 bg-gray-50 capitalize">{car.category}</span>
+                </div>
+                <div className="mt-3 text-sm text-gray-600 flex flex-wrap gap-3">
+                  <span>ที่นั่ง {car.seats}</span>
+                  <span>กระเป๋า {car.luggage}</span>
+                  <span>เชื้อเพลิง {car.fuel}</span>
+                </div>
+                <ul className="mt-3 text-sm text-gray-700 list-disc list-inside">
+                  {car.features.map((f: string, i: number) => (
+                    <li key={i}>{f}</li>
+                  ))}
+                </ul>
+                <div className="mt-4 flex items-center justify-between">
+                  <div>
+                    <div className="text-xs text-gray-500">เริ่มต้น/ครึ่งวัน</div>
+                    <div className="font-semibold">฿{car.priceHalf.toLocaleString()} <span className="text-gray-400 text-xs">(~5 ชม.)</span></div>
+                  </div>
+                  <div>
+                    <div className="text-xs text-gray-500">เริ่มต้น/เต็มวัน</div>
+                    <div className="font-semibold">฿{car.priceDay.toLocaleString()} <span className="text-gray-400 text-xs">(~10 ชม.)</span></div>
+                  </div>
+                </div>
+                <div className="mt-4 flex gap-2">
+                  <a href="#booking" className="flex-1 text-center px-4 py-2 rounded-2xl bg-black text-white">จองคันนี้</a>
+                  <a href="#contact" className="px-4 py-2 rounded-2xl border">สอบถาม</a>
+                </div>
+              </div>
+            </motion.div>
+          ))}
+        </div>
+      </Section>
+
+      {/* PRICING / NOTES */}
+      <Section id="pricing" title="ราคา & เงื่อนไขเบื้องต้น" subtitle="โปรดติดต่อเพื่อเช็ครถว่างและราคาอัปเดต">
+        <div className="grid md:grid-cols-3 gap-5 text-sm">
+          <div className="p-5 rounded-2xl border bg-white">
+            <h4 className="font-semibold mb-2">รวมในราคา</h4>
+            <ul className="list-disc list-inside text-gray-700 space-y-1">
+              <li>คนขับมืออาชีพ</li>
+              <li>ประกันภัยผู้โดยสารมาตรฐาน</li>
+              <li>ค่าน้ำมัน <span className="text-gray-500">(ถ้ามีแพ็กเกจรวม)</span></li>
+            </ul>
+          </div>
+          <div className="p-5 rounded-2xl border bg-white">
+            <h4 className="font-semibold mb-2">ไม่รวมในราคา</h4>
+            <ul className="list-disc list-inside text-gray-700 space-y-1">
+              <li>ค่าทางด่วน/ที่จอดรถ</li>
+              <li>ค่าที่พักคนขับ (กรณีออกต่างจังหวัดหลายวัน)</li>
+              <li>VAT (ถ้าต้องการใบกำกับภาษี)</li>
+            </ul>
+          </div>
+          <div className="p-5 rounded-2xl border bg-white">
+            <h4 className="font-semibold mb-2">การชำระเงิน</h4>
+            <ul className="list-disc list-inside text-gray-700 space-y-1">
+              <li>มัดจำเพื่อยืนยันการจอง</li>
+              <li>ชำระส่วนที่เหลือวันให้บริการ</li>
+              <li>ขอยกเลิกล่วงหน้าอย่างน้อย 48 ชม.</li>
+            </ul>
+          </div>
+        </div>
+      </Section>
+
+      {/* BOOKING FORM */}
+      <Section id="booking" title="จองรถ / ขอใบเสนอราคา" subtitle="กรอกข้อมูลเบื้องต้น ทีมงานจะติดต่อกลับโดยเร็ว">
+        <form onSubmit={onSubmit} className="grid md:grid-cols-2 gap-5 bg-white border p-6 rounded-3xl shadow-sm">
+          <div>
+            <label className="text-sm text-gray-600">ชื่อ-นามสกุล</label>
+            <input required value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} className="mt-1 w-full border rounded-xl px-3 py-2" placeholder="เช่น สมชาย ใจดี" />
+          </div>
+          <div>
+            <label className="text-sm text-gray-600">เบอร์โทรศัพท์</label>
+            <input required value={form.phone} onChange={(e) => setForm({ ...form, phone: e.target.value })} className="mt-1 w-full border rounded-xl px-3 py-2" placeholder="08x-xxx-xxxx" />
+          </div>
+          <div>
+            <label className="text-sm text-gray-600">วันที่ใช้งาน</label>
+            <input type="date" required value={form.date} onChange={(e) => setForm({ ...form, date: e.target.value })} className="mt-1 w-full border rounded-xl px-3 py-2" />
+          </div>
+          <div>
+            <label className="text-sm text-gray-600">ประเภทรถ</label>
+            <select value={form.type} onChange={(e) => setForm({ ...form, type: e.target.value })} className="mt-1 w-full border rounded-xl px-3 py-2">
+              <option value="compact">รถเล็ก</option>
+              <option value="suv">SUV</option>
+              <option value="van">รถตู้</option>
+            </select>
+          </div>
+          <div>
+            <label className="text-sm text-gray-600">สถานที่รับ</label>
+            <input value={form.pickup} onChange={(e) => setForm({ ...form, pickup: e.target.value })} className="mt-1 w-full border rounded-xl px-3 py-2" placeholder="เช่น สนามบินสุวรรณภูมิ" />
+          </div>
+          <div>
+            <label className="text-sm text-gray-600">สถานที่ส่ง</label>
+            <input value={form.dropoff} onChange={(e) => setForm({ ...form, dropoff: e.target.value })} className="mt-1 w-full border rounded-xl px-3 py-2" placeholder="เช่น โรงแรมในเมือง" />
+          </div>
+          <div className="md:col-span-2 flex items-center justify-between gap-3">
+            <div className="text-xs text-gray-500">
+              หรือทักไลน์: <b>{COMPANY.line}</b> | โทร: <b>{COMPANY.phone}</b>
+            </div>
+            <button type="submit" className="inline-flex items-center gap-2 px-6 py-3 rounded-2xl bg-black text-white">
+              <Calendar size={18} /> ส่งคำขอจอง
+            </button>
+          </div>
+        </form>
+      </Section>
+
+      {/* CONTACT */}
+      <Section id="contact" title="ติดต่อเรา" subtitle="สอบถามรถว่าง โปรโมชั่น หรือเงื่อนไขเพิ่มเติม">
+        <div className="grid md:grid-cols-3 gap-5">
+          <div className="p-5 rounded-2xl border bg-white">
+            <div className="text-sm text-gray-500">โทร</div>
+            <div className="font-semibold">{COMPANY.phone}</div>
+          </div>
+          <div className="p-5 rounded-2xl border bg-white">
+            <div className="text-sm text-gray-500">LINE</div>
+            <div className="font-semibold">{COMPANY.line}</div>
+          </div>
+          <div className="p-5 rounded-2xl border bg-white">
+            <div className="text-sm text-gray-500">Facebook</div>
+            <div className="font-semibold">{COMPANY.facebook}</div>
+          </div>
+        </div>
+      </Section>
+
+      {/* FOOTER */}
+      <footer className="border-t py-10 text-sm text-gray-600">
+        <div className="max-w-7xl mx-auto px-4 flex flex-col md:flex-row items-center justify-between gap-3">
+          <div>© {new Date().getFullYear()} {COMPANY.nameTh} • บริการรถเช่าพร้อมคนขับ</div>
+          <div className="flex items-center gap-4">
+            <a href="#services" className="hover:text-black">บริการ</a>
+            <a href="#fleet" className="hover:text-black">รถให้เช่า</a>
+            <a href="#booking" className="hover:text-black">จองรถ</a>
+          </div>
+        </div>
+      </footer>
+    </div>
+  );
+}
