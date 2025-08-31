@@ -1,0 +1,661 @@
+<!doctype html>
+<html lang="th">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JUP Private Taxi - รถเหมาพร้อมคนขับ บริการระดับ VIP ทั่วไทย</title>
+  <meta name="description" content="JUP Private Taxi บริการรถเหมาพร้อมคนขับระดับ VIP รถใหม่สะอาด คนขับมืออาชีพ ตรงเวลา ราคายุติธรรม ครอบคลุมทั่วไทย">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;600;700&family=Prompt:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <style>
+    /* ปรับค่าสีสำหรับโทนหรูหรา */
+    :root {
+      --primary-color: #007bff;
+      --secondary-color: #f59e0b;
+      --dark-bg: #1a1a1a; /* พื้นหลังเข้ม */
+      --light-bg: #2c2c2c; /* พื้นหลังส่วนสลับ */
+      --text-color: #f1f3f5; /* สีตัวอักษรสว่าง */
+      --heading-color: #f8f9fa; /* สีหัวข้อสว่าง */
+      --border-radius: 12px;
+      --shadow: rgba(0, 0, 0, 0.4);
+    }
+
+    body {
+      font-family: 'Prompt', sans-serif;
+      margin: 0;
+      padding: 0;
+      background: var(--dark-bg);
+      color: var(--text-color);
+      line-height: 1.7;
+    }
+
+    h1, h2, h3 {
+      font-family: 'Kanit', sans-serif;
+      color: var(--heading-color);
+      font-weight: 700;
+      margin-bottom: 20px;
+    }
+    h1 { font-size: 2.8em; text-shadow: none; }
+    h2 { font-size: 2.2em; text-align: center; margin-bottom: 40px; }
+    h3 { font-size: 1.5em; }
+
+    header {
+      padding: 20px 20px;
+      text-align: center;
+    }
+    .main-title {
+      font-size: 3.2em;
+      font-weight: 700;
+      color: var(--secondary-color);
+      text-align: center;
+      margin: 30px 0 15px;
+      line-height: 1.2;
+    }
+    .hero-subtitle {
+      text-align: center;
+      font-size: 1.3em;
+      margin-bottom: 25px;
+      color: var(--primary-color);
+    }
+
+    .contact-info {
+      text-align: center;
+      margin-bottom: 30px;
+      font-size: 1.1em;
+    }
+    .contact-info a {
+      color: var(--primary-color);
+      text-decoration: none;
+      font-weight: 600;
+      transition: color 0.3s ease;
+    }
+    .contact-info a:hover {
+      color: #0056b3;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 14px 28px;
+      background: var(--primary-color);
+      color: var(--light-bg);
+      text-decoration: none;
+      border-radius: var(--border-radius);
+      margin-top: 20px;
+      font-weight: 600;
+      font-size: 1.1em;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 8px var(--shadow);
+    }
+    .btn:hover {
+      background: #0056b3;
+      transform: translateY(-3px);
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+    }
+    .btn-secondary {
+        background: var(--secondary-color);
+        color: var(--dark-bg);
+    }
+    .btn-secondary:hover {
+        background: #e68a00;
+    }
+
+    section {
+      max-width: 1100px;
+      margin: auto;
+      padding: 60px 20px;
+      background: var(--dark-bg);
+    }
+    section:nth-of-type(even) {
+      background: var(--light-bg);
+    }
+
+    .hero-section {
+      background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://images.unsplash.com/photo-1509233725247-49e657a82834?q=80&w=2000&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D') no-repeat center center/cover;
+      padding: 100px 20px;
+      text-align: center;
+      color: var(--text-color);
+      position: relative;
+    }
+    .hero-section .main-title,
+    .hero-section .hero-subtitle,
+    .hero-section .contact-info p,
+    .hero-section .contact-info a {
+        color: var(--heading-color);
+        text-shadow: 1px 1px 2px #000;
+    }
+    .hero-section .contact-info a {
+        color: var(--primary-color);
+        text-shadow: none;
+    }
+
+    .features, .plans, .fleet, .service-areas {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 30px;
+    }
+    .card {
+      background: #2c2c2c;
+      padding: 30px;
+      border-radius: var(--border-radius);
+      box-shadow: 0 6px 15px var(--shadow);
+      text-align: center;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+    .card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 5px;
+        background: var(--primary-color);
+        transform: translateX(-100%);
+        transition: transform 0.3s ease-out;
+    }
+    .card:hover::before {
+        transform: translateX(0);
+    }
+    .card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+    }
+    .card small {
+      display: block;
+      margin-top: 8px;
+      color: #adb5bd;
+      font-size: 0.9em;
+    }
+    .card ul {
+      list-style: none;
+      padding: 0;
+      text-align: left;
+      margin-top: 20px;
+    }
+    .card ul li {
+      margin-bottom: 10px;
+      position: relative;
+      padding-left: 25px;
+    }
+    .card ul li::before {
+      content: '✔';
+      color: var(--secondary-color);
+      position: absolute;
+      left: 0;
+    }
+    .card p b {
+      color: var(--secondary-color);
+      font-size: 1.3em;
+      display: block;
+      margin-bottom: 15px;
+    }
+    .service-area-card ul {
+      list-style-type: none;
+      text-align: center;
+      padding: 0;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+    }
+    .service-area-card li {
+      padding: 5px 10px;
+      background: #adb5bd;
+      color: var(--dark-bg);
+      border-radius: 8px;
+      margin: 0;
+      font-size: 0.9em;
+      padding-left: 10px;
+    }
+
+    form {
+      max-width: 600px;
+      margin: 40px auto 0;
+      background: #2c2c2c;
+      padding: 40px;
+      border-radius: var(--border-radius);
+      box-shadow: 0 6px 15px var(--shadow);
+    }
+    input, textarea {
+      width: calc(100% - 20px);
+      padding: 12px;
+      margin: 10px 0;
+      border-radius: 8px;
+      border: 1px solid #4a4a4a;
+      background: #3c3c3c;
+      color: var(--text-color);
+      outline: none;
+      font-size: 1em;
+      transition: border-color 0.3s ease;
+    }
+    input:focus, textarea:focus {
+      border-color: var(--primary-color);
+      box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.25);
+    }
+    textarea {
+      min-height: 120px;
+      resize: vertical;
+    }
+    form .btn {
+      width: 100%;
+      margin-top: 25px;
+      font-size: 1.2em;
+    }
+
+    footer {
+      text-align: center;
+      padding: 30px;
+      background: var(--light-bg);
+      font-size: 0.9em;
+      color: #adb5bd;
+      margin-top: 50px;
+      box-shadow: 0 -4px 10px var(--shadow);
+    }
+
+    .floating-buttons {
+        position: fixed;
+        bottom: 30px;
+        right: 30px;
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+        z-index: 1000;
+    }
+    .floating-btn {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 16px 25px;
+      border-radius: 50px;
+      font-weight: 700;
+      text-decoration: none;
+      box-shadow: 0 6px 12px rgba(0,0,0,0.2);
+      transition: transform 0.3s ease, background 0.3s ease;
+      color: #ffffff !important;
+    }
+    .floating-btn:hover {
+      transform: scale(1.05);
+    }
+    .floating-btn svg {
+        fill: #fff;
+        width: 24px;
+        height: 24px;
+    }
+    .floating-phone {
+        background: var(--secondary-color);
+        color: var(--dark-bg);
+    }
+    .floating-phone svg {
+        fill: var(--dark-bg);
+    }
+    .floating-line {
+        background: #06c755;
+    }
+    .floating-line svg {
+        fill: #fff;
+    }
+    .floating-whatsapp {
+        background: #25d366;
+    }
+    .floating-whatsapp svg {
+        fill: #fff;
+    }
+    .floating-wechat {
+        background: #09b83e;
+    }
+    .floating-wechat svg {
+        fill: #fff;
+    }
+
+    .car-type-card {
+        padding: 25px;
+        text-align: center;
+    }
+    .car-type-card h3 {
+        margin-bottom: 10px;
+        font-size: 1.6em;
+    }
+    .car-type-card p {
+        font-size: 1.1em;
+        color: var(--text-color);
+        margin-top: 0;
+    }
+    
+    .service-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+      list-style-type: none;
+      padding: 0;
+      text-align: center;
+    }
+    .service-list li {
+      background: #2c2c2c;
+      color: var(--text-color);
+      padding: 15px;
+      border-radius: 10px;
+      font-weight: 600;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+
+    .map-container {
+        max-width: 100%;
+        margin: 20px 0;
+        text-align: center;
+    }
+    .map-container iframe {
+        width: 100%;
+        height: 450px;
+        border: 0;
+        border-radius: var(--border-radius);
+        box-shadow: 0 6px 15px var(--shadow);
+    }
+    
+    /* Responsive */
+    @media (max-width: 768px) {
+      h1 { font-size: 2.2em; }
+      h2 { font-size: 1.8em; }
+      .main-title { font-size: 2.5em; }
+      .hero-subtitle { font-size: 1em; }
+      .btn {
+        padding: 12px 20px;
+        font-size: 1em;
+      }
+      .features, .plans, .fleet, .service-areas {
+        grid-template-columns: 1fr;
+      }
+      .card {
+        padding: 25px;
+      }
+      .floating-buttons {
+          bottom: 20px;
+          right: 20px;
+          gap: 10px;
+      }
+      .floating-btn {
+        padding: 12px 18px;
+        font-size: 0.9em;
+      }
+      .floating-btn svg {
+        width: 20px;
+        height: 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1 class="main-title">JUP Private Taxi</h1>
+    <p class="hero-subtitle">รถเหมาพร้อมคนขับ บริการระดับ VIP</p>
+  </header>
+
+  <section class="hero-section">
+    <h1 class="main-title">เดินทางส่วนตัว สะดวกสบาย<br>ด้วยบริการรถเช่าพร้อมคนขับระดับ VIP</h1>
+    <p class="hero-subtitle">รถใหม่สะอาด คนขับมืออาชีพ ตรงเวลา ราคายุติธรรม</p>
+    <div class="contact-info">
+      <p>
+        📞 โทร: <a href="tel:+66980491999">098-049-1999</a><br>
+        📱 LINE: <a href="https://line.me/ti/p/~192xkjbl" target="_blank">@192xkjbl</a><br>
+        👍 Facebook: <a href="https://www.facebook.com/share/1yuyccaquq/" target="_blank">JUP Private Taxi</a>
+      </p>
+    </div>
+    <div style="text-align:center;">
+      <a href="#contact" class="btn btn-secondary">📌 จองคิว / ขอราคาพิเศษทันที</a>
+    </div>
+  </section>
+
+  <section>
+    <h2>ทำไมต้องเลือก JUP Private Taxi?</h2>
+    <div class="features">
+      <div class="card">
+        <h3>✅ คนขับมืออาชีพและสุภาพ</h3>
+        <p>คนขับมีประสบการณ์สูง ผ่านการอบรมและคัดเลือกมาอย่างดี</p>
+        <small>ขับขี่ปลอดภัย ให้บริการด้วยใจ พร้อมดูแลตลอดเส้นทาง</small>
+      </div>
+      <div class="card">
+        <h3>⏰ การันตีความตรงเวลา</h3>
+        <p>เราให้ความสำคัญกับเวลาของคุณ ไม่ต้องกังวลเรื่องการเดินทาง</p>
+        <small>มีระบบติดตามสถานะรถแบบเรียลไทม์</small>
+      </div>
+      <div class="card">
+        <h3>🚘 รถใหม่สะอาดระดับพรีเมียม</h3>
+        <p>เลือกได้ทั้งรถเก๋งหรู, SUV และรถตู้ VIP</p>
+        <small>ทุกคันได้รับการดูแลอย่างดี พร้อมประกันภัยครบวงจร</small>
+      </div>
+      <div class="card">
+        <h3>🗺️ บริการครอบคลุมทั่วไทย</h3>
+        <p>ไม่ว่าทริปธุรกิจหรือท่องเที่ยว เราพร้อมให้บริการคุณในทุกจังหวัด</p>
+        <small>เริ่มต้นจากกรุงเทพฯ ไปได้ทุกที่ที่คุณต้องการ</small>
+      </div>
+    </div>
+  </section>
+  
+  <section>
+      <h2>บริการรถเหมาพร้อมคนขับของเรา</h2>
+      <ul class="service-list">
+        <li>รถเหมาส่วนตัวพร้อมคนขับ</li>
+        <li>รถเช่าพร้อมคนขับ</li>
+        <li>บริการรถตู้ VIP พร้อมคนขับ</li>
+        <li>รถเก๋งพร้อมคนขับ</li>
+        <li>รถเหมาท่องเที่ยวต่างจังหวัด</li>
+        <li>รถรับส่งสนามบิน-โรงแรม</li>
+        <li>บริการรถรับส่งผู้บริหาร</li>
+        <li>เช่ารถพร้อมคนขับรายวัน / รายเดือน</li>
+        <li>บริการรถเหมานำเที่ยวส่วนตัว</li>
+        <li>รถเหมา ราคาพิเศษ</li>
+      </ul>
+  </section>
+
+  <section>
+      <h2>เลือกยานพาหนะที่ใช่สำหรับคุณ</h2>
+      <div class="fleet">
+          <div class="card car-type-card">
+              <h3>รถเก๋งหรู</h3>
+              <p>รถยนต์ขนาดเล็ก-กลาง เพื่อการเดินทางที่สะดวกสบายสำหรับ **1-3 ท่าน**</p>
+              <small>เหมาะสำหรับทริปธุรกิจหรือเดินทางส่วนตัวในเมือง</small>
+          </div>
+          <div class="card car-type-card">
+              <h3>รถยนต์ SUV</h3>
+              <p>ให้พื้นที่กว้างขวาง รองรับผู้โดยสารสูงสุด **4 ท่าน** พร้อมสัมภาระ</p>
+              <small>เหมาะสำหรับครอบครัวหรือกลุ่มเพื่อน</small>
+          </div>
+          <div class="card car-type-card">
+              <h3>รถตู้ VIP</h3>
+              <p>รถตู้พร้อมสิ่งอำนวยความสะดวกครบครัน เพื่อการเดินทางที่หรูหราสำหรับ **8-10 ท่าน**</p>
+              <small>เหมาะสำหรับทริปกลุ่มใหญ่หรือการเดินทางระยะยาว</small>
+          </div>
+      </div>
+  </section>
+
+  <section>
+    <h2>แพ็กเกจราคาที่คุ้มค่า</h2>
+    <div class="plans">
+      <div class="card">
+        <h3>ในกรุงเทพฯ และปริมณฑล</h3>
+        <p><b>เริ่มต้นเพียง 1,500฿/วัน</b></p>
+        <ul>
+          <li>ใช้งาน 8 ชั่วโมง / ระยะทาง 100 กม.</li>
+          <li>อัตรานี้รวมคนขับมืออาชีพ</li>
+          <li>ค่าน้ำมันและค่าทางด่วนลูกค้าชำระตามจริง</li>
+        </ul>
+        <a href="#contact" class="btn">จองเลย!</a>
+      </div>
+      <div class="card">
+        <h3>เดินทางต่างจังหวัด</h3>
+        <p><b>เริ่มต้นเพียง 2,500฿/วัน</b></p>
+        <ul>
+          <li>ใช้งาน 10 ชั่วโมง / ระยะทาง 200 กม.</li>
+          <li>อัตรานี้รวมคนขับผู้เชี่ยวชาญ</li>
+          <li>ค่าน้ำมัน, ค่าทางด่วน, ค่าที่พักคนขับ (หากมี) ลูกค้าชำระ</li>
+        </ul>
+        <a href="#contact" class="btn">สอบถามเพิ่มเติม</a>
+      </div>
+      <div class="card">
+        <h3>ทัวร์ส่วนตัว VIP</h3>
+        <p><b>สอบถามราคาพิเศษ</b></p>
+        <ul>
+          <li>บริการรถตู้ VIP หรูหรา สะดวกสบาย</li>
+          <li>วางแผนเส้นทางท่องเที่ยวตามความต้องการ</li>
+          <li>ดูแลทุกรายละเอียดตลอดทริป</li>
+          <li>เหมาะสำหรับครอบครัวและกรุ๊ปทัวร์</li>
+        </ul>
+        <a href="#contact" class="btn btn-secondary">ปรึกษาเรา</a>
+      </div>
+    </div>
+  </section>
+  
+  <section id="airport-map">
+    <h2>จุดรับ-ส่ง สนามบินสุวรรณภูมิ</h2>
+    <p>เรามีจุดนัดหมายที่ชัดเจนและคนขับจะถือป้ายชื่อรอต้อนรับลูกค้าที่ **ชั้น 2 (ผู้โดยสารขาเข้า) ประตู 3-4** เพื่อความสะดวกและตรงเวลา</p>
+    <div class="map-container">
+      <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3876.326880053915!2d100.7499692!3d13.6848031!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x311d61d1e4e2d427%3A0x6d908d1f88c8f000!2sSuvarnabhumi%20Airport%20Gate%203!5e0!3m2!1sen!2sth!4v1689230580918!5m2!1sen!2sth" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="แผนที่จุดรับผู้โดยสาร สนามบินสุวรรณภูมิ"></iframe>
+    </div>
+  </section>
+
+  <section>
+    <h2>จุดรับ-ส่ง สนามบินดอนเมือง</h2>
+    <p>จุดนัดพบที่ชัดเจนสำหรับลูกค้าที่เดินทางถึงสนามบินดอนเมืองคือที่ **อาคาร 1 (ผู้โดยสารขาเข้า) ประตู 5** เพื่อความสะดวกและตรงเวลา</p>
+    <div class="map-container">
+      <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3876.326880053915!2d100.7499692!3d13.6848031!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x311d61d1e4e2d427%3A0x6d908d1f88c8f000!2sSuvarnabhumi%20Airport%20Gate%203!5e0!3m2!1sen!2sth!4v1689230580918!5m2!1sen!2sth" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="แผนที่จุดรับผู้โดยสาร สนามบินดอนเมือง"></iframe>
+    </div>
+  </section>
+
+  <section class="service-areas">
+    <h2>พื้นที่บริการครอบคลุมทั่วไทย</h2>
+    <div class="card service-area-card">
+        <h3>ภาคเหนือ</h3>
+        <ul>
+            <li>เชียงราย</li>
+            <li>เชียงใหม่</li>
+            <li>น่าน</li>
+            <li>พะเยา</li>
+            <li>แพร่</li>
+            <li>แม่ฮ่องสอน</li>
+            <li>ลำปาง</li>
+            <li>ลำพูน</li>
+            <li>อุตรดิตถ์</li>
+        </ul>
+    </div>
+    <div class="card service-area-card">
+        <h3>ภาคตะวันออกเฉียงเหนือ</h3>
+        <ul>
+            <li>กาฬสินธุ์</li>
+            <li>ขอนแก่น</li>
+            <li>ชัยภูมิ</li>
+            <li>นครพนม</li>
+            <li>เลย</li>
+            <li>นครราชสีมา</li>
+            <li>บึงกาฬ</li>
+            <li>บุรีรัมย์</li>
+            <li>มหาสารคาม</li>
+            <li>มุกดาหาร</li>
+            <li>ยโสธร</li>
+            <li>ร้อยเอ็ด</li>
+            <li>สกลนคร</li>
+            <li>สุรินทร์</li>
+            <li>ศรีสะเกษ</li>
+            <li>หนองคาย</li>
+            <li>หนองบัวลำภู</li>
+            <li>อุดรธานี</li>
+            <li>อุบลราชธานี</li>
+            <li>อำนาจเจริญ</li>
+        </ul>
+    </div>
+    <div class="card service-area-card">
+        <h3>ภาคกลาง</h3>
+        <ul>
+            <li>กำแพงเพชร</li>
+            <li>ชัยนาท</li>
+            <li>นครนายก</li>
+            <li>นครปฐม</li>
+            <li>นครสวรรค์</li>
+            <li>นนทบุรี</li>
+            <li>ปทุมธานี</li>
+            <li>พิจิตร</li>
+            <li>พระนครศรีอยุธยา</li>
+            <li>ลพบุรี</li>
+            <li>พิษณุโลก</li>
+            <li>เพชรบูรณ์</li>
+            <li>สมุทรปราการ</li>
+            <li>สิงห์บุรี</li>
+            <li>สมุทรสงคราม</li>
+            <li>สมุทรสาคร</li>
+            <li>สุโขทัย</li>
+            <li>สุพรรณบุรี</li>
+            <li>สระบุรี</li>
+            <li>อ่างทอง</li>
+            <li>อุทัยธานี</li>
+        </ul>
+    </div>
+    <div class="card service-area-card">
+        <h3>ภาคตะวันออก</h3>
+        <ul>
+            <li>จันทบุรี</li>
+            <li>ฉะเชิงเทรา</li>
+            <li>ชลบุรี</li>
+            <li>ตราด</li>
+            <li>ระยอง</li>
+            <li>ปราจีนบุรี</li>
+            <li>สระแก้ว</li>
+        </ul>
+    </div>
+    <div class="card service-area-card">
+        <h3>ภาคใต้</h3>
+        <ul>
+            <li>กระบี่</li>
+            <li>ชุมพร</li>
+            <li>ตรัง</li>
+            <li>นครศรีธรรมราช</li>
+            <li>นราธิวาส</li>
+            <li>ปัตตานี</li>
+            <li>พังงา</li>
+            <li>สตูล</li>
+            <li>พัทลุง</li>
+            <li>ภูเก็ต</li>
+            <li>ระนอง</li>
+            <li>สงขลา</li>
+            <li>สุราษฎร์ธานี</li>
+            <li>ยะลา</li>
+        </ul>
+    </div>
+  </section>
+
+  <section id="contact">
+    <h2>ติดต่อเรา เพื่อจองคิว / ขอราคาพิเศษ</h2>
+    <form onsubmit="alert('JUP Private Taxi ได้รับคำขอของคุณแล้ว! เราจะติดต่อกลับโดยเร็วที่สุด'); return false;">
+      <input type="text" placeholder="ชื่อ-นามสกุล ของท่าน" required>
+      <input type="tel" placeholder="เบอร์โทรศัพท์ (สำหรับติดต่อกลับ)" required>
+      <input type="email" placeholder="อีเมล (ถ้ามี)">
+      <textarea placeholder="รายละเอียดการเดินทาง (เช่น วันที่, เวลา, จุดรับ-ส่ง, จำนวนผู้โดยสาร, ประเภทรถที่ต้องการ)"></textarea>
+      <button type="submit" class="btn">ส่งคำขอจอง</button>
+    </form>
+  </section>
+
+  <footer>
+    © 2025 JUP Private Taxi - รถเหมาพร้อมคนขับ | โทร 098-049-1999 | LINE @192xkjbl<br>
+    บริการด้วยใจ มั่นใจในทุกการเดินทาง
+  </footer>
+
+  <div class="floating-buttons">
+    <a href="tel:+66980491999" class="floating-btn floating-phone">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.12.35.03.74-.25 1.02L6.62 10.79z"/></svg>
+      โทร 098-049-1999
+    </a>
+    <a href="https://lin.ee/Zo1ND8f" class="floating-btn floating-line" target="_blank">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm3.33 13.56c-.53.5-1.13.75-1.92.75-.82 0-1.47-.28-1.93-.84-.46-.56-.69-1.34-.69-2.35 0-.96.22-1.74.67-2.34.45-.61 1.05-.91 1.8-.91.75 0 1.35.31 1.8.92.45.61.68 1.41.68 2.42 0 1.01-.23 1.8-.68 2.39zm-3.33-6.55c.42-.56 1-.84 1.74-.84s1.32.28 1.74.84c.42.56.63 1.34.63 2.34 0 1.01-.21 1.8-.63 2.36-.42.56-1 .84-1.74.84s-1.32-.28-1.74-.84c-.42-.56-.63-1.34-.63-2.36 0-1.01.21-1.8.63-2.34z"/></svg>
+        ติดต่อ LINE
+    </a>
+    <a href="http://wa.me/66838346060" class="floating-btn floating-whatsapp" target="_blank">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.33 4.96L2 22l5.24-1.38c1.45.79 3.08 1.25 4.8.96h.01c5.44 0 9.89-4.45 9.89-9.91 0-5.45-4.44-9.9-9.9-9.9zm.04 1.52c4.61 0 8.38 3.77 8.38 8.38s-3.77 8.38-8.38 8.38c-1.46.01-2.92-.37-4.22-1.09l-3.32.88.89-3.26c-.76-1.31-1.16-2.82-1.16-4.38 0-4.61 3.77-8.38 8.38-8.38zm-2.07 5.22c-.22 0-.49.07-.66.24-.17.17-.6.64-.6.76s.44.91.56 1.09c.12.18.23.2.45.55.22.34.62.87.8.98.17.12.31.1.42.06.12-.04.41-.15.53-.2.12-.07.22-.09.4-.04.18.05.57.27 1.09.52.52.25.86.4.99.5.13.1.25.07.35.04.1-.03.3-.11.41-.19.11-.08.23-.2.34-.33.11-.13.22-.25.33-.35.11-.1.21-.08.31-.05.1.03.65.31.78.37.13.06.2.09.34.09.13 0 .23-.0.4-.08.17-.08.73-.28.87-.36.14-.08.2-.06.34-.05.14.01.27.01.35.02.08.01.19.01.24.03.05.02.19.08.2.19s.02.26-.14.4c-.16.14-.65.65-1.07.78-.42.13-.78.18-1.16.15-.38-.03-.89-.25-1.44-.5s-1.03-.7-1.74-1.07c-.71-.37-1.34-.74-2.07-1.45-.73-.72-1.27-1.61-1.45-1.89s-.2-.42-.19-.78c.01-.36.2-.74.27-.86.07-.12.18-.21.24-.26.06-.05.12-.13.19-.2c.07-.07.15-.14.21-.2.07-.06.13-.13.18-.18.05-.05.13-.11.23-.2c.1-.09.2-.14.27-.14z"/></svg>
+        ติดต่อ WhatsApp
+    </a>
+    <a href="http://googleusercontent.com/file_content/2" class="floating-btn floating-wechat" target="_blank">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path d="M12.001 2c-5.522 0-9.999 4.478-9.999 9.999 0 3.328 1.624 6.355 4.336 8.271l-1.928 2.052c-.172.183-.245.433-.207.674.038.242.203.44.437.525.234.085.494.026.685-.144l.872-.791 2.213-.885c1.474.57 3.064.873 4.717.873 5.521 0 9.999-4.477 9.999-9.999s-4.478-9.999-9.999-9.999zM12 4.025c4.403 0 7.974 3.571 7.974 7.974s-3.571 7.974-7.974 7.974c-1.442-.001-2.875-.386-4.136-1.121l-3.328.88.89-3.26c-.77-.866-1.2-1.92-1.2-3.051 0-4.403 3.571-7.974 7.974-7.974zM8.336 9.53c-.322-.055-.658-.082-.996-.082-.728 0-1.203.226-1.503.771-.3.545-.3 1.393-.3 1.838 0 .445.022.956.096 1.487l.214 1.488c.074.512.219.78.432.846.213.067.433-.004.595-.142.162-.137.33-.31.528-.567.198-.258.42-.455.666-.569.246-.114.474-.15.688-.116.214.034.426.11.637.228.21.119.382.205.518.258.136.053.284.076.444.076.495 0 .86-.188 1.096-.549.236-.361.353-.872.353-1.532 0-1.272-1.07-2.196-1.84-2.583-.77-.386-1.637-.58-2.6-.58z"/></svg>
+        ติดต่อ WeChat
+    </a>
+  </div>
+</body>
+</html>
